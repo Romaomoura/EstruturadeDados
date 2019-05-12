@@ -1,4 +1,4 @@
-class DynamicQueue{
+class DynamicQueue{ // Classe DynamicQueu criada
     constructor(){
         this.head = null;
         this.tail = null;
