@@ -1,125 +1,125 @@
-class LinkedList {
+class LinkedList { // Classe LinkedList criada
 
-    constructor() {
-        this.head = null;
-        this.length = 0;
+    constructor() { // Constructor da classe LinkedList
+        this.head = null; // head inicializado com null
+        this.length = 0; // length inicializado com 0
     }
 
-    isEmpty() {
-        return this.head === null;
+    isEmpty() { // isEmpty inicializado sem parâmetros
+        return this.head === null; // retorna true se a head for estritamente igual a null e false caso contrário
     }
 
-    append(element) {
-        let node = new Node(element),
-            current = this.head;
-        if (this.isEmpty()) {
-            this.head = node;
-        } else {
-            while (current.next)
-                current = current.next;
-            current.next = node;
+    append(element) { // append inicializado com o parâmetro element
+        let node = new Node(element), // variável node recebe uma nova instância da classe Node passando o parâmetro element para o constructor
+            current = this.head; // current recebe a head da lista
+        if (this.isEmpty()) { // se isEmpty retornar true (a lista estiver vazia)...
+            this.head = node; // a head recebe o node atual
+        } else { // se isEmpty retornar false (a lista não está vazia)...
+            while (current.next) // enquanto houver um pŕoximo elemento
+                current = current.next; // current recebe o próximo elemento
+            current.next = node; // o próximo elemento recebe o node atual
         }
-        this.length++;
+        this.length++; // o tamanho da lista aumenta em 1
     }
 
-    show(separator = ", ") {
-        let current = this.head,
-            output = '';
-        if (current != null) {
-            output += current.content;
-            while (current.next) {
-                current = current.next;
-                output += separator + current.content;
+    show(separator = ", ") { // show inicializado com o parâmetro separator, que recebe ", " por padrão
+        let current = this.head, // a variável current recebe a head atual
+            output = ''; // a variável output recebe ''
+        if (current != null) { // se current for diferente de null, ou seja, a lista tem no mínimo um elemento...
+            output += current.content; // output recebe '' concatenado com o conteúdo de current, o que faz com que o valor passe a ser string
+            while (current.next) { // enquanto houver um pŕoximo elemento
+                current = current.next; // current recebe o próximo elemento
+                output += separator + current.content;  // output recebe o separador e o current content, alinhando todos os valores da lista separados pelo separador
             }
         }
-        return output;
+        return output; // retorna output
     }
 
-    insert(position, element) {
-        if (position > -1 && position <= this.size()) {
-            let node = new Node(element),
-                current = this.head,
-                previous = null,
-                index=0;
-            if (position==0) {
-                node.next = this.head;
-                this.head = node;
-            } else {
-                while(index<position){
-                    index++;
-                    previous=current;
-                    current=current.next;
+    insert(position, element) { // insert iinicializado com os parâmetros position e element
+        if (position > -1 && position <= this.size()) { // se position for maior que -1 e menor ou igual a o tamanho da lista...
+            let node = new Node(element), // variável node recebe uma nova instância da classe Node passando o parâmetro element para o constructor
+                current = this.head, // a variável current recebe a head atual
+                previous = null, // a variável previous recebe null
+                index=0; // a variável index recebe 0
+            if (position==0) { // Se position for igual a 0...
+                node.next = this.head; // o próximo node recebe a head atual
+                this.head = node; // a head atual recebe o node, assim, a head passa a ser o novo node
+            } else { // se position for diferente de 0...
+                while(index<position){ // enquanto index for menor que position
+                    index++; // index é aumentado em 1
+                    previous=current; // previous recebe current
+                    current=current.next; // current recebe o próximo valor da lista, assim a lista é percorrida
                 }
-                node.next=current;
-                previous.next=node;
+                node.next=current; // após percorrer a lista e encontrar a posição, o próximo node recebe current
+                previous.next=node; // e previous.next recebe node
             }
-            this.length++;
-            return true;
+            this.length++; // o tamanho da lista é aumentado em um
+            return true; // é retornado true
         }
-        return false;
+        return false; // caso a position passada esteja fora da lista, retorna-se false
     }
 
-    removeAt(position) {
-        if (position > -1 && position < this.size()) {
-            let current = this.head,
-                previous = null,
-                index = 0;
-            if(position===0){
-                this.head = current.next;
-            }else{
-                while (index < position) {
-                    index++;
-                    previous = current;
-                    current = current.next;
+    removeAt(position) { // removeAt inicializado com o parâmetro position
+        if (position > -1 && position < this.size()) { // se position for maior que -1 e menor que o tamanho da lista...
+            let current = this.head, // a variável current recebe a head atual
+                previous = null, // a variável previous recebe null
+                index = 0; // a variável index recebe 0
+            if(position===0){ // se position for estritamente igual a 0...
+                this.head = current.next; // a head atual recebe o próximo node
+            }else{ // se position for diferente de 0...
+                while (index < position) { // enquanto index for menor que position...
+                    index++; // index é aumentado em um
+                    previous = current; // previous recebe current
+                    current = current.next; // current recebe o próximo, assim a lista é percorrida
                 }
-                previous.next = current.next;
+                previous.next = current.next; // previous.next recebe current.next, assim current é apagado
             }
-            current.next = null
-            this.length--;
-            return current.content;
+            current.next = null // current.next recebe null
+            this.length--; // o tamanho da lista é reduzido em um
+            return current.content; // current.content é retornado
         }
-        return null;
+        return null; // caso a position passada esteja fora da lista, retorna-se null
     }
 
-    remove(element) {
-       let index = this.indexOf(element);
-       return this.removeAt(index);
+    remove(element) { // remove inicializado com o parâmetro element
+       let index = this.indexOf(element); // variável index recebe o index do elemento passado
+       return this.removeAt(index); // é retornada a função removeAt que retorna o elemento apagado
     }
 
-    indexOf(element) {
-        let current = this.head,
-            index = 0;
-        while(current!==null){
-            if(current.content===element) {
-                return index;
+    indexOf(element) { // indexOf inicializado com o parâmetro elemento
+        let current = this.head, // a variável current recebe a head atual
+            index = 0; // a variável index recebe 0
+        while(current!==null){ // enquanto current for estritamente diferente de null...
+            if(current.content===element) { // se current.content for estritamente igual a element...
+                return index; // o index é retornado
             }
-            index++
-            current = current.next;
+            index++ // index é aumentado em um
+            current = current.next; // current recebe current.next, assim a lista é percorrida
         }
-        return -1;
+        return -1; // caso o elemento não seja encontrado, retorna-se -1
     }
 
 
-    size() {
-        return this.length;
+    size() { // size inicializado sem parâmetros
+        return this.length; // retorna o tamanho da lista
     }
 
-    getElement(position) {
-        if(position<0 && position>=this.length)
-            return null;
-        let current = this.head,
-            index = 0;
-        while (current !== null) {
-            if (index === position) {
-                return current.content;
+    getElement(position) { // getElement inicializado com o parâmetro position
+        if(position<0 && position>=this.length) // se position for menor que 0 e maior ou igual ao tamanho da lista...
+            return null; // retorna-se null
+        let current = this.head, // a variável current recebe a head atual
+            index = 0; // a variável index recebe 0
+        while (current !== null) { // enquanto current for estritamente diferente de null...
+            if (index === position) { // se o index for estritamente igual a posição...
+                return current.content; // é retornado current.content
             }
-            index++
-            current = current.next;
+            index++ // index é aumentado em um
+            current = current.next; // current recebe current.next, assim a lista é percorrida
         }
     }
 
-    search(value) {
-        return this.indexOf(value)>=0;
+    search(value) { // search inicializado com o parâmetro value
+        return this.indexOf(value)>=0; // retorna true se o elemento existe na lista, e false caso contrário
     }
 
 }
