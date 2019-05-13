@@ -3,7 +3,7 @@ class DinamicStack { // criando a classe Pilha dinamica
     constructor() { // criando o construtor da classe
         this.top = null; // criancao da variavel top recebendo nulo inicialmente
         this.length = 0; // criancao da variavel length (tamanho) recebendo 0 inicialmente
-    }
+    }//fim do construtor da classe
 
     push(element) { // implementando o metodo push (enpurrar elementos)
         let node  = new Node(element); //criando na variavel local node do tipo Node recebendo o elemento
@@ -12,7 +12,7 @@ class DinamicStack { // criando a classe Pilha dinamica
         }
         this.top = node; // top recebe node
         this.length++;// length recebe length mais o proximo elemento
-    }
+    }//fim do metodo push
 
     pop() {// implementação do metodo pop ( remover elementos do array)
         if(this.isEmpty()) //condição para verificação 
@@ -22,24 +22,24 @@ class DinamicStack { // criando a classe Pilha dinamica
         diedNode.next = null; // variavel local recebe proximo, nulo sendo atribuido
         this.length--; // length decrementado
         return diedNode.content;// retonando o conteudo diedNode
-    }
+    }//fim do metodo pop
 
     peek() {// implementação do metodo peek (desempilhando elementos do array)
         return this.length-1; // tamanho do array -1 é retornado
-    }
+    }//fim do metodo peek
 
     isEmpty() { // implementação do metodo isEmpty (array vazio)
         return this.top===null; // valor retornado caso o topo (top) seja nulo
-    }
+    }//fim do metodo isEmpty
 
     size() {// implementando o metodo size (tamanho do array)
         return this.length;//retornando o tamanho do array
-    }
+    }//fim do metodo size
 
     clear() { // implementando o metodo clear (limpar o array)
         this.top=null ; //topo (top) recebe nulo
         this.length = 0;//comprimento do array recebe 0
-    }
+    } // fim do metodo clear
 
     print(separator = ' - ') {// implementação do metodo print(definindo separador do conteudo)
         let text = "", // criação da variavel local recebendo vazio
@@ -49,5 +49,5 @@ class DinamicStack { // criando a classe Pilha dinamica
             current = current.next // atual (current) recebe o proximo atual (current.next)
         }
         return text.substr(0, text.length - separator.length);// valores retornados após cada iteração menos o separado ao final
-    }
-}
+    }// fim do metodo print
+}// fim da classe pilha dinamica
