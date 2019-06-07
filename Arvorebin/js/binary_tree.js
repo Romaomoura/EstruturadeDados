@@ -1,0 +1,87 @@
+class BinaryTree{
+    // inicializa a raiz como nula
+    constructor(){
+        this.root = null;
+    }
+
+    //insere o elemento da arvores
+    insert(element){
+        this.root = this.insertNode(this.root, element);
+    }
+    insertNode(rootNode, value){
+        if (rootNode==null) {
+            return new Node(value);
+        }
+        if(value>rootNode.content){
+            rootNode.right = this.insertNode(rootNode.right, value);
+        }else{
+            rootNode.left = this.insertNode(rootNode.left, value);
+        }
+        return rootNode;
+    }
+
+    //retorna true se o valor já existe na arvore
+    search(value) {
+        return this.searchNode(this.root, value);
+    }
+    searchNode(rootNode, value){
+        if (rootNode == null) return false;
+        if (rootNode.content == value) return true;
+        if (value > rootNode.content)
+            return this.searchNode(rootNode.right, value);
+        else
+            return this.searchNode(rootNode.left, value);
+    }
+
+
+    //executa a função callback para cada nó, em ordem
+    inOrderTraverse(callback){
+        this.inOrder(this.root, callback);
+    }
+    inOrder(rootNode, callback) {
+        if (rootNode == null) return;
+        this.inOrder(rootNode.left, callback);
+        callback(rootNode.content);
+        this.inOrder(rootNode.right, callback);
+    }
+
+    //executa a função callback para cada nó, em pré-ordem
+    preOrderTraverse(callback){
+        this.preOrder(this.root, callback);  
+    }
+    preOrder(rootNode, callback) {
+        if (rootNode == null) return;
+        callback(rootNode.content);
+        this.preOrder(rootNode.left, callback);
+        this.preOrder(rootNode.right, callback);
+    }
+
+    //executa a função callback para cada nó, em pós-ordem
+    postOrderTraverse(callback){
+        this.postOrder(this.root, callback);  
+    }
+    postOrder(rootNode, callback) {
+        if (rootNode == null) return;
+        this.postOrder(rootNode.left, callback);
+        this.postOrder(rootNode.right, callback);
+        callback(rootNode.content);
+    }
+    
+    //remove um elemento existente na arvore o retorna
+    remove(value){
+    }
+
+    //exibe a altura da arvore
+    heigth(){
+    }
+
+    // informa quantos nós existem na arvore
+    size(){
+    }
+
+    //exibe o menor valor da arvore
+    min() {}
+
+    //exibe o maior valor da arvore
+    max() {}
+}
