@@ -78,20 +78,20 @@ class BinaryTree{ // Classe BinaryTree criada
                 rootNode = rootNode.left; // Se não, o nó da direita retorna nulo e mostra o nó da esquerda
             } else if (rootNode.left == null) { 
                 rootNode = rootNode.right; // Se não, o nó da esquerda retorna nulo e mostra o nó da direita
-            } else{ 
-                let i = rootNode.right; 
-                while(i.left!=null){
-                    i = i.left;   
+            } else { // Caso nenhum dos nós acima seja nulo
+                let i = rootNode.right; // i recebe o conteúdo do nó da direita
+                while(i.left!=null){ // enquanto o nó à esquerda de não for nulo...
+                    i = i.left;  // ...i recebe conteúdo do nó da esquerda de i
                 }
-                i.left = rootNode.left;
-                rootNode = rootNode.right;
+                i.left = rootNode.left; // o nó da esquerda de i recebe conteúdo do no da esquerda de rootNode
+                rootNode = rootNode.right; // rootNode recebe o conteúdo do no da direita de rootNode
             }
-        }else if(value>rootNode.content){
-            rootNode.right = this.removeNode(rootNode.right, value);
-        }else{
-            rootNode.left = this.removeNode(rootNode.left, value);
+        }else if(value>rootNode.content){ // Caso value seja maior que o rootNode.content
+            rootNode.right = this.removeNode(rootNode.right, value); // O nó da direita de rootNode recebe a função removeNode fazendo assim a recursão
+        }else{ // Caso else
+            rootNode.left = this.removeNode(rootNode.left, value); // A esquerda do rootNode recebe a função removeNode fazendo assim a recursão
         }
-        return rootNode;
+        return rootNode; // retorna rootNode com o nó removido
     }
 
     
